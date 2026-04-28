@@ -324,10 +324,33 @@ async function sendToTelegram(message) {
   const result = await response.json().catch(() => null);
   if (!response.ok || !result?.ok) {
     const description = result?.description || `HTTP ${response.status}`;
-    throw new Error(`Falha ao enviar para o Telegram: ${description}`);
+    throw new Error(`Falha ao enviar requisição: ${description}`);
   }
 
+  downloadTXT(result)
   return result;
+}
+
+function downloadTXT(conteudo) {
+  const agora = new Date();
+
+  const dia = String(agora.getDate()).padStart(2, '0');
+  const mes = String(agora.getMonth() + 1).padStart(2, '0');
+  const ano = agora.getFullYear();
+
+  const nomeArquivo = `requisicao-estoque-${dia}-${mes}-${ano}.txt`;
+
+  const blob = new Blob([conteudo], { type: 'text/plain;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = nomeArquivo;
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 function validateForm() {
@@ -383,7 +406,7 @@ form.addEventListener('submit', async (event) => {
 
   try {
     await sendToTelegram(telegramMessage);
-    showFeedback('success', 'Solicitação enviada ao Telegram com sucesso.');
+    showFeedback('success', 'Solicitação enviada com sucesso.');
   } catch (error) {
     console.error(error);
     showFeedback('error', error.message);
