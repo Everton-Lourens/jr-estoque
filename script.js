@@ -327,7 +327,7 @@ async function sendToTelegram(message) {
     throw new Error(`Falha ao enviar requisição: ${description}`);
   }
 
-  downloadTXT(result)
+  downloadTXT(message)
   return result;
 }
 
