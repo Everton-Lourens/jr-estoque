@@ -1,13 +1,13 @@
 // JR TELECOM CAMAÇARI
 // Site estático para GitHub Pages com envio ao Telegram.
 
-const BASE_NAME = 'JR TELECOM CAMAÇARI';
+const BASE_NAME = 'JR TELECOM - CAMAÇARI';
 const SECTION_TITLE = 'Pedidos - Estoque';
 const MESSAGE_TITLE = '🚨 Nova Solicitação de Materiais de Estoque 🚨';
 
 // Mantidas no código, como solicitado.
-const TELEGRAM_BOT_TOKEN = 'COLOQUE_SEU_TOKEN_AQUI';
-const TELEGRAM_CHAT_ID = 'COLOQUE_SEU_CHAT_ID_AQUI';
+const TELEGRAM_BOT_TOKEN = '8675551330:AAH5G9TcjqoI-rjvCr-QBAlQ4Wsxkolu9hY';
+const TELEGRAM_CHAT_ID = '-1003549071393';
 
 const MATERIALS = [
   {
