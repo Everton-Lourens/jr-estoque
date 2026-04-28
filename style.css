@@ -172,6 +172,10 @@ body::before {
   gap: 8px;
 }
 
+.full-width {
+  grid-column: 1 / -1;
+}
+
 label {
   font-weight: 700;
   font-size: 0.95rem;
@@ -190,7 +194,8 @@ button {
 input[type="text"],
 input[type="search"],
 input[type="number"],
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid rgba(141, 201, 255, 0.18);
   background: rgba(255,255,255,0.04);
@@ -204,6 +209,12 @@ textarea {
 textarea {
   resize: vertical;
   min-height: 110px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 input::placeholder,

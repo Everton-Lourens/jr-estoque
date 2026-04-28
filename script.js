@@ -1,34 +1,107 @@
-// JR TELECOM - CAMAÇARI
-// Aplicação estática para GitHub Pages com envio ao Telegram.
+// JR TELECOM CAMAÇARI
+// Site estático para GitHub Pages com envio ao Telegram.
 
-const COMPANY_NAME = 'JR TELECOM - CAMAÇARI';
-const RESPONSIBLE_NAME = 'Everton Lourenço';
+const BASE_NAME = 'JR TELECOM CAMAÇARI';
+const SECTION_TITLE = 'Pedidos - Estoque';
+const MESSAGE_TITLE = '🚨 Nova Solicitação de Materiais de Estoque 🚨';
 
 // Mantidas no código, como solicitado.
-const TELEGRAM_BOT_TOKEN = '8675551330:AAH5G9TcjqoI-rjvCr-QBAlQ4Wsxkolu9hY';
-const TELEGRAM_CHAT_ID = '-1003549071393';
+const TELEGRAM_BOT_TOKEN = 'COLOQUE_SEU_TOKEN_AQUI';
+const TELEGRAM_CHAT_ID = 'COLOQUE_SEU_CHAT_ID_AQUI';
 
 const MATERIALS = [
-  { id: 'cabo-rede', name: 'Cabo de rede', description: 'Patch de rede para ligações, manutenção e organização.' },
-  { id: 'rj45', name: 'Conector RJ45', description: 'Conector de 8 vias para terminação de cabo de rede.' },
-  { id: 'roteador', name: 'Roteador', description: 'Equipamento para distribuição de rede e conectividade.' },
-  { id: 'fonte', name: 'Fonte', description: 'Fontes e adaptadores para alimentação de equipamentos.' },
-  { id: 'patch-cord', name: 'Patch cord', description: 'Cabo pronto para conexões rápidas em racks e pontos.' },
-  { id: 'switch', name: 'Switch', description: 'Equipamento de distribuição de portas de rede.' },
-  { id: 'bateria', name: 'Bateria', description: 'Baterias para nobreak, rádio ou equipamentos compatíveis.' },
-  { id: 'tomada', name: 'Tomada', description: 'Tomadas e pontos elétricos de apoio à instalação.' },
-  { id: 'plug', name: 'Plug', description: 'Plugs e conectores para adaptações elétricas ou técnicas.' },
-  { id: 'fita-isolante', name: 'Fita isolante', description: 'Fita para isolamento, acabamento e segurança.' },
-  { id: 'abracadeira', name: 'Abraçadeira', description: 'Organização de cabos e fixação em instalações.' },
-  { id: 'organizacao-cabeamento', name: 'Organização de cabeamento', description: 'Itens e materiais para organização de cabos.' },
-  { id: 'outros', name: 'Outros itens técnicos', description: 'Use para materiais não listados na estrutura fixa.' }
+  {
+    id: 'esticadores',
+    name: 'Esticadores',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [50, 100],
+  },
+  {
+    id: 'placas-jr',
+    name: 'Placas JR',
+    unitLabel: 'Unidades',
+    type: 'number',
+    min: 0,
+    max: 49,
+    step: 1,
+  },
+  {
+    id: 'drop-fibra',
+    name: 'Drop Fibra',
+    unitLabel: 'Metros',
+    type: 'select',
+    options: [1000, 2000],
+  },
+  {
+    id: 'fixa-fio',
+    name: 'Fixa Fio',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [100, 200],
+  },
+  {
+    id: 'fita-crepe',
+    name: 'Fita Crepe',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [0, 1],
+  },
+  {
+    id: 'fita-isolante',
+    name: 'Fita Isolante',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [0, 1],
+  },
+  {
+    id: 'conectores-apc',
+    name: 'Conectores APC',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [10, 20, 30],
+  },
+  {
+    id: 'abracadeira',
+    name: 'Abraçadeira',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [50, 100],
+  },
+  {
+    id: 'espiral',
+    name: 'Espiral',
+    unitLabel: 'Metros',
+    type: 'select',
+    options: [1, 2],
+  },
+  {
+    id: 'bucha-parafuso',
+    name: 'Bucha & Parafuso',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [50, 100],
+  },
+  {
+    id: 'bucha-acabamento',
+    name: 'Bucha de Acabamento',
+    unitLabel: 'Unidades',
+    type: 'number',
+    min: 0,
+    max: 30,
+    step: 1,
+  },
+  {
+    id: 'etiqueta-lacre',
+    name: 'Etiqueta Lacre',
+    unitLabel: 'Folhas (68 cada)',
+    type: 'select',
+    options: [1, 2],
+  },
 ];
 
 const form = document.getElementById('requestForm');
 const technicianInput = document.getElementById('technicianName');
-const sectorInput = document.getElementById('sector');
-const internalIdInput = document.getElementById('internalId');
-const observationsInput = document.getElementById('observations');
 const feedbackEl = document.getElementById('feedback');
 const materialsListEl = document.getElementById('materialsList');
 const clearSelectionBtn = document.getElementById('clearSelectionBtn');
@@ -37,10 +110,10 @@ function pad(value) {
   return String(value).padStart(2, '0');
 }
 
-function getTimestampParts(date = new Date()) {
+function formatDateTime(date = new Date()) {
   return {
     date: `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}`,
-    time: `${pad(date.getHours())}:${pad(date.getMinutes())}`,
+    time: `${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`,
   };
 }
 
@@ -60,6 +133,20 @@ function escapeFilename(value) {
     .slice(0, 60) || 'solicitacao';
 }
 
+function formatQuantity(value, material) {
+  const formattedValue = typeof value === 'number' ? value.toLocaleString('pt-BR') : value;
+
+  if (material.id === 'etiqueta-lacre') {
+    return value === 1 ? '1 folha (68 etiquetas)' : `${formattedValue} folhas (68 etiquetas cada)`;
+  }
+
+  if (material.id === 'drop-fibra' || material.id === 'espiral') {
+    return `${formattedValue} ${material.unitLabel}`;
+  }
+
+  return `${formattedValue} ${material.unitLabel}`;
+}
+
 function showFeedback(type, message) {
   feedbackEl.className = `feedback show ${type}`;
   feedbackEl.textContent = message;
@@ -70,31 +157,64 @@ function clearFeedback() {
   feedbackEl.textContent = '';
 }
 
+function formatOptionLabel(material, option) {
+  if (material.id === 'drop-fibra') {
+    return `${option.toLocaleString('pt-BR')} metros`;
+  }
+
+  if (material.id === 'etiqueta-lacre') {
+    return `${option} folha${option > 1 ? 's' : ''} (68 cada)`;
+  }
+
+  if (material.id === 'espiral') {
+    return `${option} metro${option > 1 ? 's' : ''}`;
+  }
+
+  return `${option} ${material.unitLabel.toLowerCase()}`;
+}
+
 function createMaterialCard(material) {
   const article = document.createElement('article');
   article.className = 'material-item';
   article.dataset.materialId = material.id;
+
+  const helper = material.type === 'number'
+    ? `Limite: de ${material.min} até ${material.max}`
+    : `Opções permitidas: ${material.options.map((value) => formatOptionLabel(material, value)).join(' ou ')}`;
+
+  const control = material.type === 'number'
+    ? `
+      <input
+        type="number"
+        min="${material.min}"
+        max="${material.max}"
+        step="${material.step || 1}"
+        value=""
+        id="${material.id}-qty"
+        class="qty-input"
+        inputmode="numeric"
+        aria-label="Quantidade de ${material.name}"
+        placeholder="0"
+      />
+    `
+    : `
+      <select id="${material.id}-qty" class="qty-input" aria-label="Quantidade de ${material.name}">
+        <option value="">Selecione</option>
+        ${material.options.map((option) => `<option value="${option}">${formatOptionLabel(material, option)}</option>`).join('')}
+      </select>
+    `;
 
   article.innerHTML = `
     <div class="material-top">
       <input type="checkbox" id="${material.id}" class="material-check" aria-label="Selecionar ${material.name}" />
       <div class="material-label">
         <label for="${material.id}" class="material-name">${material.name}</label>
-        <div class="material-desc">${material.description}</div>
+        <div class="material-desc">${helper}</div>
       </div>
     </div>
     <div class="qty-wrap">
       <label for="${material.id}-qty">Quantidade</label>
-      <input
-        type="number"
-        min="1"
-        step="1"
-        value="1"
-        id="${material.id}-qty"
-        class="qty-input"
-        inputmode="numeric"
-        aria-label="Quantidade de ${material.name}"
-      />
+      ${control}
     </div>
   `;
 
@@ -105,17 +225,27 @@ function createMaterialCard(material) {
   const syncSelection = () => {
     article.classList.toggle('selected', checkbox.checked);
     qtyWrap.style.display = checkbox.checked ? 'grid' : 'none';
-    if (checkbox.checked && (!qtyInput.value || Number(qtyInput.value) < 1)) {
-      qtyInput.value = 1;
+
+    if (checkbox.checked) {
+      if (material.type === 'select' && qtyInput.value === '') {
+        qtyInput.selectedIndex = 0;
+      }
+      if (material.type === 'number' && qtyInput.value !== '' && Number(qtyInput.value) < material.min) {
+        qtyInput.value = material.min;
+      }
     }
   };
 
   checkbox.addEventListener('change', syncSelection);
-  qtyInput.addEventListener('input', () => {
-    if (qtyInput.value === '' || Number(qtyInput.value) < 1) {
-      qtyInput.value = '';
-    }
-  });
+
+  if (material.type === 'number') {
+    qtyInput.addEventListener('input', () => {
+      if (qtyInput.value === '') return;
+      const value = Number(qtyInput.value);
+      if (!Number.isInteger(value) || value < material.min) qtyInput.value = material.min;
+      if (value > material.max) qtyInput.value = material.max;
+    });
+  }
 
   syncSelection();
   return article;
@@ -133,76 +263,51 @@ function getSelectedMaterials() {
   document.querySelectorAll('.material-item').forEach((item) => {
     const checkbox = item.querySelector('.material-check');
     const qtyInput = item.querySelector('.qty-input');
-    if (checkbox.checked) {
-      const qty = Math.max(1, parseInt(qtyInput.value, 10) || 0);
-      selected.push({
-        name: item.querySelector('.material-name').textContent.trim(),
-        quantity: qty
-      });
+    const material = MATERIALS.find((entry) => entry.id === item.dataset.materialId);
+
+    if (!checkbox.checked || !material) return;
+
+    let quantity = null;
+    if (material.type === 'select') {
+      quantity = qtyInput.value === '' ? null : Number(qtyInput.value);
+    } else {
+      quantity = qtyInput.value === '' ? null : Number(qtyInput.value);
     }
+
+    if (quantity === null || Number.isNaN(quantity)) return;
+    if (!Number.isInteger(quantity) || quantity < material.min || (typeof material.max === 'number' && quantity > material.max)) return;
+    if (quantity === 0) return;
+
+    selected.push({
+      name: material.name,
+      quantity,
+      unitLabel: material.unitLabel,
+      materialId: material.id,
+    });
   });
+
   return selected;
-}
-
-function buildTxtContent(data, selectedMaterials, generatedAt) {
-  const materialsText = selectedMaterials.length
-    ? selectedMaterials.map((item) => `- ${item.name}: ${item.quantity}`).join('\n')
-    : '- Nenhum material selecionado';
-
-  return [
-    'SOLICITAÇÃO DE MATERIAIS',
-    '========================================',
-    `Empresa: ${COMPANY_NAME}`,
-    `Nome do técnico: ${data.technicianName}`,
-    `Setor/local: ${data.sector || '-'}`,
-    `Identificação complementar: ${data.internalId || '-'}`,
-    `Data do envio: ${generatedAt.date}`,
-    `Hora do envio: ${generatedAt.time}`,
-    '',
-    'Materiais solicitados:',
-    materialsText,
-    '',
-    'Observações:',
-    data.observations || '-',
-    '',
-    '========================================',
-    'Gerado automaticamente pelo sistema'
-  ].join('\n');
 }
 
 function buildTelegramMessage(data, selectedMaterials, generatedAt) {
   const materialsText = selectedMaterials.length
-    ? selectedMaterials.map((item) => `• ${item.name} x${item.quantity}`).join('\n')
-    : '• Nenhum material selecionado';
+    ? selectedMaterials.map((item) => `🔹 ${item.name}: ${formatQuantity(item.quantity, MATERIALS.find((m) => m.id === item.materialId))}`).join('\n')
+    : '🔹 Nenhum material selecionado';
 
   return [
-    'SOLICITAÇÃO DE MATERIAIS',
-    `Empresa: ${COMPANY_NAME}`,
-    `Técnico: ${data.technicianName}`,
-    `Setor/local: ${data.sector || '-'}`,
-    `Identificação complementar: ${data.internalId || '-'}`,
-    `Data do envio: ${generatedAt.date}`,
-    `Hora do envio: ${generatedAt.time}`,
+    SECTION_TITLE,
+    MESSAGE_TITLE,
     '',
-    'Materiais solicitados:',
+    `👷 Técnico: ${data.technicianName}`,
+    `🏢 Base: ${BASE_NAME}`,
+    `📅 Data da Solicitação: ${generatedAt.date}`,
+    `⏰ Horário da Solicitação: ${generatedAt.time}`,
+    '',
+    '🧰 Suprimentos Solicitados:',
+    '------------------------------',
     materialsText,
-    '',
-    `Observações: ${data.observations || '-'}`,
-    '',
-    `Responsável: ${RESPONSIBLE_NAME}`
+    '------------------------------',
   ].join('\n');
-}
-
-function downloadTextFile(content, filename) {
-  const blob = new Blob([`\ufeff${content}`], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = filename;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 async function sendToTelegram(message) {
@@ -217,8 +322,7 @@ async function sendToTelegram(message) {
     body: JSON.stringify({
       chat_id: TELEGRAM_CHAT_ID,
       text: message,
-      parse_mode: 'Markdown'
-    })
+    }),
   });
 
   const result = await response.json().catch(() => null);
@@ -240,15 +344,8 @@ function validateForm() {
 
   const selectedMaterials = getSelectedMaterials();
   if (!selectedMaterials.length) {
-    showFeedback('error', 'Selecione ao menos um material para continuar.');
+    showFeedback('error', 'Selecione ao menos um material com quantidade válida.');
     return false;
-  }
-
-  for (const item of selectedMaterials) {
-    if (!Number.isInteger(item.quantity) || item.quantity < 1) {
-      showFeedback('error', `A quantidade do item "${item.name}" precisa ser maior que zero.`);
-      return false;
-    }
   }
 
   return true;
@@ -257,9 +354,6 @@ function validateForm() {
 function collectFormData() {
   return {
     technicianName: sanitizeText(technicianInput.value),
-    sector: sanitizeText(sectorInput.value),
-    internalId: sanitizeText(internalIdInput.value),
-    observations: sanitizeText(observationsInput.value)
   };
 }
 
@@ -267,8 +361,14 @@ function clearSelection() {
   document.querySelectorAll('.material-item').forEach((item) => {
     const checkbox = item.querySelector('.material-check');
     const qtyInput = item.querySelector('.qty-input');
+    const material = MATERIALS.find((entry) => entry.id === item.dataset.materialId);
+
     checkbox.checked = false;
-    qtyInput.value = 1;
+    if (material?.type === 'select') {
+      qtyInput.selectedIndex = 0;
+    } else {
+      qtyInput.value = '';
+    }
     item.classList.remove('selected');
     item.querySelector('.qty-wrap').style.display = 'none';
   });
@@ -282,20 +382,15 @@ form.addEventListener('submit', async (event) => {
 
   const data = collectFormData();
   const selectedMaterials = getSelectedMaterials();
-  const generatedAt = getTimestampParts(new Date());
-
-  const txtContent = buildTxtContent(data, selectedMaterials, generatedAt);
-  const fileName = `pedido_${escapeFilename(data.technicianName)}_${generatedAt.date.replace(/\//g, '-')}.txt`;
+  const generatedAt = formatDateTime(new Date());
   const telegramMessage = buildTelegramMessage(data, selectedMaterials, generatedAt);
-
-  downloadTextFile(txtContent, fileName);
 
   try {
     await sendToTelegram(telegramMessage);
-    showFeedback('success', 'Pedido enviado ao Telegram e arquivo .txt gerado com sucesso.');
+    showFeedback('success', 'Solicitação enviada ao Telegram com sucesso.');
   } catch (error) {
     console.error(error);
-    showFeedback('error', `${error.message} O arquivo .txt foi gerado mesmo assim.`);
+    showFeedback('error', error.message);
   }
 });
 

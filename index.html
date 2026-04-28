@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JR TELECOM - CAMAÇARI | Pedido de Materiais</title>
-  <meta name="description" content="Pedido de materiais para a JR TELECOM - CAMAÇARI." />
+  <title>JR TELECOM CAMAÇARI | Solicitação de Materiais</title>
+  <meta name="description" content="Solicitação de materiais da base JR TELECOM CAMAÇARI." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,48 +13,32 @@
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">JR</div>
         <div class="brand-copy">
-          <p class="eyebrow">Pedido de materiais</p>
-          <h1>JR TELECOM - CAMAÇARI</h1>
+          <p class="eyebrow">Pedidos - Estoque</p>
+          <h1>JR TELECOM CAMAÇARI</h1>
           <p>
-            Selecione os materiais, informe os dados do atendimento e envie o pedido
-            diretamente para o Telegram.
+            Selecione somente os materiais necessários e envie a solicitação diretamente para o Telegram.
           </p>
         </div>
       </div>
 
       <aside class="hero-card">
         <span class="hero-tag">GitHub Pages</span>
-        <strong>Site estático, leve e pronto para publicar.</strong>
-        <p>Os dados de data e hora são gerados no envio e não aparecem na tela.</p>
+        <strong>Formulário estático, rápido e pronto para publicar.</strong>
+        <p>Data e hora são geradas apenas no envio e não aparecem na tela.</p>
       </aside>
     </section>
 
     <section class="card">
       <header class="section-head">
-        <h2>Dados do pedido</h2>
-        <p>Preencha apenas as informações necessárias para identificação do atendimento.</p>
+        <h2>Solicitação de materiais</h2>
+        <p>Preencha o nome do técnico e informe apenas os itens que serão solicitados.</p>
       </header>
 
       <form id="requestForm" novalidate>
         <div class="grid">
-          <div class="field">
+          <div class="field full-width">
             <label for="technicianName">Nome do técnico <span>*</span></label>
             <input type="text" id="technicianName" name="technicianName" placeholder="Digite o nome do técnico" autocomplete="name" required />
-          </div>
-
-          <div class="field">
-            <label for="sector">Setor / local de atendimento</label>
-            <input type="text" id="sector" name="sector" placeholder="Ex.: cliente, rua, bairro, setor..." />
-          </div>
-
-          <div class="field">
-            <label for="internalId">Identificação complementar</label>
-            <input type="text" id="internalId" name="internalId" placeholder="Ex.: OS, observação interna..." />
-          </div>
-
-          <div class="field">
-            <label for="observations">Observações</label>
-            <textarea id="observations" name="observations" rows="4" placeholder="Informações adicionais do pedido..."></textarea>
           </div>
         </div>
 
@@ -62,7 +46,7 @@
           <div class="materials-head">
             <div>
               <h2>Materiais solicitados</h2>
-              <p>Marque os itens e ajuste a quantidade desejada.</p>
+              <p>Cada item já vem com as opções permitidas para evitar erro no pedido.</p>
             </div>
             <button type="button" class="ghost-btn" id="clearSelectionBtn">Limpar seleção</button>
           </div>
@@ -74,9 +58,7 @@
 
         <div class="actions">
           <button type="submit" class="primary-btn">Enviar pedido ao Telegram</button>
-          <p class="actions-note">
-            O pedido também gera um arquivo .txt para download com os dados completos.
-          </p>
+          <p class="actions-note">O pedido será enviado no formato da mensagem do Telegram, com data e hora geradas automaticamente.</p>
         </div>
       </form>
     </section>
