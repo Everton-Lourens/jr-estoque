@@ -23,7 +23,7 @@ const MATERIALS = [
     unitLabel: 'Unidades',
     type: 'number',
     min: 0,
-    max: 49,
+    max: 50,
     step: 1,
   },
   {
@@ -45,14 +45,14 @@ const MATERIALS = [
     name: 'Fita Crepe',
     unitLabel: 'Unidades',
     type: 'select',
-    options: [0, 1],
+    options: [1],
   },
   {
     id: 'fita-isolante',
     name: 'Fita Isolante',
     unitLabel: 'Unidades',
     type: 'select',
-    options: [0, 1],
+    options: [1],
   },
   {
     id: 'conectores-apc',
@@ -66,7 +66,7 @@ const MATERIALS = [
     name: 'Abraçadeira',
     unitLabel: 'Unidades',
     type: 'select',
-    options: [50, 100],
+    options: [100, 200],
   },
   {
     id: 'espiral',
@@ -94,7 +94,7 @@ const MATERIALS = [
   {
     id: 'etiqueta-lacre',
     name: 'Etiqueta Lacre',
-    unitLabel: 'Folhas (68 cada)',
+    unitLabel: 'Folhas (68 unidades)',
     type: 'select',
     options: [1, 2],
   },
