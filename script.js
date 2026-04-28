@@ -90,7 +90,7 @@ const MATERIALS = [
   {
     id: 'etiqueta-lacre',
     name: 'Etiqueta Lacre',
-    unitLabel: 'Cartela (69 unidades)',
+    unitLabel: 'Cartela (69 etiquetas)',
     type: 'select',
     options: [1, 2],
   },
@@ -133,7 +133,7 @@ function formatQuantity(value, material) {
   const formattedValue = typeof value === 'number' ? value.toLocaleString('pt-BR') : value;
 
   if (material.id === 'etiqueta-lacre') {
-    return value === 1 ? '1 folha (68 etiquetas)' : `${formattedValue} folhas (68 etiquetas cada)`;
+    return value === 1 ? '1 cartela (69 etiquetas)' : `${formattedValue} cartelas (138 etiquetas)`;
   }
 
   if (material.id === 'drop-fibra' || material.id === 'espiral') {
