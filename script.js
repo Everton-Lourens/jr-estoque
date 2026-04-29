@@ -327,20 +327,6 @@ function validateFields() {
     }
   });
 
-  // validações adicionais (caso ainda use essa função)
-  validarItem('checkEsticadores', 'esticadores', 'labelEsticadores');
-  validarItem('checkPlacas', 'placas', 'labelPlacas');
-  validarItem('checkDrop', 'drop', 'labelDrop');
-  validarItem('checkFixaFio', 'fixafio', 'labelFixaFio');
-  validarItem('checkFitaCrepe', 'fitacrepe', 'labelFitaCrepe');
-  validarItem('checkFitaIsolante', 'fitaisolante', 'labelFitaIsolante');
-  validarItem('checkConectores', 'conectores', 'labelConectores');
-  validarItem('checkAbracadeira', 'abracadeira', 'labelAbracadeira');
-  validarItem('checkEspiral', 'espiral', 'labelEspiral');
-  validarItem('checkBucha', 'bucha', 'labelBucha');
-  validarItem('checkAcabamento', 'acabamento', 'labelAcabamento');
-  validarItem('checkEtiqueta', 'etiqueta', 'labelEtiqueta');
-
   return valido;
 }
 
