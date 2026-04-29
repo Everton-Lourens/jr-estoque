@@ -334,13 +334,17 @@ function validateFields() {
     }
   });
 
-  // faz scroll até o primeiro erro
-  if (primeiroErro) {
-    primeiroErro.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
-    });
+if (primeiroErro) {
+  primeiroErro.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  });
+
+  const select = primeiroErro.querySelector('select');
+  if (select) {
+    select.focus();
   }
+}
 
   return valido;
 }
