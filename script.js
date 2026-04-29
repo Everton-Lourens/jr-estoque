@@ -314,7 +314,7 @@ let valido = true;
   itens.forEach(item => {
     const checkbox = item.querySelector('input[type="checkbox"]');
     const select = item.querySelector('select');
-    const titulo = item.querySelector('.material-title');
+    const titulo = item.querySelector('.material-name');
 
     // limpa erro
     titulo.classList.remove('erro');
