@@ -103,6 +103,13 @@ body::before {
   line-height: 1.05;
 }
 
+.erro {
+  color: #ff4d4d !important;
+}
+.borda-erro {
+  border: 2px solid #ff4d4d !important;
+}
+
 .brand-copy p {
   margin: 12px 0 0;
   color: var(--muted);
