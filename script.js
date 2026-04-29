@@ -12,14 +12,14 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC...',
+    name: 'Conectores SC/APC',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
   },
   {
     id: 'drop-fibra',
-    name: 'Drop Fibra',
+    name: 'Drop Fibra.',
     unitLabel: 'Metros',
     type: 'select',
     options: [1000, 2000],
@@ -428,20 +428,12 @@ const selects = document.querySelectorAll('.qty-input');
 selects.forEach(select => {
   const label = document.querySelector(`label[for="${select.id}"]`);
 
-  const updateLabel = () => {
-    Alert(select.value);
-    if (select.value === 'Selecione') {
-      label.classList.add('label-error');
-    } else {
-      label.classList.remove('label-error');
-    }
+  const update = () => {
+    label.classList.toggle('label-placeholder', select.value !== '');
   };
 
-  // estado inicial
-  updateLabel();
-
-  // ao mudar
-  select.addEventListener('change', updateLabel);
+  update();
+  select.addEventListener('change', update);
 });
 
 form.addEventListener('submit', async (event) => {
