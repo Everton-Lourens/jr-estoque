@@ -195,7 +195,7 @@ function createMaterialCard(material) {
     `
     : `
       <select id="${material.id}-qty" class="qty-input" aria-label="Quantidade de ${material.name}">
-        <option value="">&lt;SELECIONE&gt;</option>
+        <option value="">&lt;Selecione&gt;</option>
         ${material.options.map((option) => `<option value="${option}">${formatOptionLabel(material, option)}</option>`).join('')}
       </select>
     `;
