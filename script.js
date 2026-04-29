@@ -307,22 +307,27 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
 }
 
 function validateFields() {
-  let valido = true;
+let valido = true;
 
-  function validarItem(checkId, selectId, labelId) {
-    const check = document.getElementById(checkId);
-    const select = document.getElementById(selectId);
-    const label = document.getElementById(labelId);
+  const itens = document.querySelectorAll('.material-item');
 
-    // limpa erro antes
-    label.classList.remove('erro');
+  itens.forEach(item => {
+    const checkbox = item.querySelector('input[type="checkbox"]');
+    const select = item.querySelector('select');
+    const titulo = item.querySelector('.material-title');
+
+    // limpa erro
+    titulo.classList.remove('erro');
     select.classList.remove('borda-erro');
 
-    if (check.checked && (!select.value || select.value === '')) {
-      label.classList.add('erro');
+    if (checkbox.checked && (!select.value || select.value === '')) {
+      titulo.classList.add('erro');
       select.classList.add('borda-erro');
       valido = false;
     }
+  });
+
+  return valido;
   }
 
   validarItem('checkEsticadores', 'esticadores', 'labelEsticadores');
