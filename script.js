@@ -12,7 +12,7 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC.',
+    name: 'Conectores SC/APC',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
