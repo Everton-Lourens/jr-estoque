@@ -426,13 +426,20 @@ function clearSelection() {
 const selects = document.querySelectorAll('.qty-input');
 
 selects.forEach(select => {
-  select.addEventListener('change', () => {
+
+  const updateColor = () => {
     if (select.value === '') {
-      select.style.color = 'red';
+      select.classList.add('placeholder');
     } else {
-      select.style.color = '';
+      select.classList.remove('placeholder');
     }
-  });
+  };
+
+  // estado inicial
+  updateColor();
+
+  // quando muda
+  select.addEventListener('change', updateColor);
 });
 
 form.addEventListener('submit', async (event) => {
