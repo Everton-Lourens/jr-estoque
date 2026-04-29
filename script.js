@@ -12,7 +12,7 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC.',
+    name: 'Conectores SC/APC',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
@@ -307,42 +307,29 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
 }
 
 function validateFields() {
-  let valido = true;
-  let primeiroErro = null; // 👈 guarda o primeiro erro
+let valido = true;
 
-  const itens = document.querySelectorAll('.material-item');
+const itens = document.querySelectorAll('.material-item');
 
-  itens.forEach(item => {
-    const checkbox = item.querySelector('input[type="checkbox"]');
-    const select = item.querySelector('select');
-    const titulo = item.querySelector('.material-name');
+itens.forEach(item => {
+const checkbox = item.querySelector('input[type="checkbox"]');
+const select = item.querySelector('select');
+const titulo = item.querySelector('.material-name');
 
-    // limpa erro
-    titulo.classList.remove('erro');
-    select.classList.remove('borda-erro');
+// limpa erro
+titulo.classList.remove('erro');
+select.classList.remove('borda-erro');
 
-    if (checkbox.checked && (!select.value || select.value === '')) {
-      titulo.classList.add('erro');
-      select.classList.add('borda-erro');
+if (checkbox.checked && (!select.value || select.value === '')) {
+titulo.classList.add('erro');
+select.classList.add('borda-erro');
+valido = false;
+}
 
-      if (!primeiroErro) {
-        primeiroErro = item; // 👈 salva o primeiro erro encontrado
-      }
+});
 
-      valido = false;
-    }
-  });
-
-  // 👇 faz o scroll até o primeiro erro
-  if (primeiroErro) {
-    primeiroErro.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
-    });
-  }
-
-  return valido;
-        }
+return valido;
+}
 
 async function sendToTelegram(message) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || TELEGRAM_BOT_TOKEN.includes('COLOQUE_') || TELEGRAM_CHAT_ID.includes('COLOQUE_')) {
