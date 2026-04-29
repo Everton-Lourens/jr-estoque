@@ -444,7 +444,7 @@ function verificarDia() {
 
   status.textContent = `Hoje é: ${nomesDias[hoje]}`;
 
-  if (diasPermitidos.includes(hoje) || true) {
+  if (diasPermitidos.includes(hoje)) {
     status.classList.add('ok');
     status.classList.remove('erro');
   } else {
