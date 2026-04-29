@@ -306,9 +306,49 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
   ].join('\n');
 }
 
+function validateFields() {
+  let valido = true;
+
+  function validarItem(checkId, selectId, labelId) {
+    const check = document.getElementById(checkId);
+    const select = document.getElementById(selectId);
+    const label = document.getElementById(labelId);
+
+    // limpa erro antes
+    label.classList.remove('erro');
+    select.classList.remove('borda-erro');
+
+    if (check.checked && (!select.value || select.value === '')) {
+      label.classList.add('erro');
+      select.classList.add('borda-erro');
+      valido = false;
+    }
+  }
+
+  validarItem('checkEsticadores', 'esticadores', 'labelEsticadores');
+  validarItem('checkPlacas', 'placas', 'labelPlacas');
+  validarItem('checkDrop', 'drop', 'labelDrop');
+  validarItem('checkFixaFio', 'fixafio', 'labelFixaFio');
+  validarItem('checkFitaCrepe', 'fitacrepe', 'labelFitaCrepe');
+  validarItem('checkFitaIsolante', 'fitaisolante', 'labelFitaIsolante');
+  validarItem('checkConectores', 'conectores', 'labelConectores');
+  validarItem('checkAbracadeira', 'abracadeira', 'labelAbracadeira');
+  validarItem('checkEspiral', 'espiral', 'labelEspiral');
+  validarItem('checkBucha', 'bucha', 'labelBucha');
+  validarItem('checkAcabamento', 'acabamento', 'labelAcabamento');
+  validarItem('checkEtiqueta', 'etiqueta', 'labelEtiqueta');
+
+  return valido;
+}
+
 async function sendToTelegram(message) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || TELEGRAM_BOT_TOKEN.includes('COLOQUE_') || TELEGRAM_CHAT_ID.includes('COLOQUE_')) {
     throw new Error('Configure o token e o chat_id do Telegram no código.');
+  }
+
+  if (!validateFields()) {
+  alert('Preencha a quantidade dos itens selecionados!');
+  return;
   }
 
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
