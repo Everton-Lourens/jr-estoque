@@ -118,6 +118,10 @@ body::before {
   border: 2px solid #ff4d4d !important;
 }
 
+.label-error {
+  color: red;
+}
+
 .brand-copy p {
   margin: 12px 0 0;
   color: var(--muted);
