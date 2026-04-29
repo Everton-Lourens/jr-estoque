@@ -159,7 +159,7 @@ function formatOptionLabel(material, option) {
   }
 
   if (material.id === 'etiqueta-lacre') {
-    return `${option} folha${option > 1 ? 's' : ''} (68 cada)`;
+    return `${option} cartela${option > 1 ? 's' : ''} (69 cada)`;
   }
 
   if (material.id === 'espiral') {
