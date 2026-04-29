@@ -307,7 +307,7 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
 }
 
 function validateFields() {
-let valido = true;
+  let valido = true;
 
   const itens = document.querySelectorAll('.material-item');
 
@@ -327,9 +327,7 @@ let valido = true;
     }
   });
 
-  return valido;
-  }
-
+  // validações adicionais (caso ainda use essa função)
   validarItem('checkEsticadores', 'esticadores', 'labelEsticadores');
   validarItem('checkPlacas', 'placas', 'labelPlacas');
   validarItem('checkDrop', 'drop', 'labelDrop');
