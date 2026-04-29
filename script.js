@@ -12,7 +12,7 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC',
+    name: 'Conectores SC/APC.',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
@@ -423,17 +423,16 @@ function clearSelection() {
   });
 }
 
-function updateSelectColor(select) {
-  if (select.value === '') {
-    select.style.color = 'red';
-  } else {
-    select.style.color = '#000';
-  }
-}
+const selects = document.querySelectorAll('.qty-input');
 
-// aplica ao carregar a página
-document.querySelectorAll('.meu-select').forEach(select => {
-  updateSelectColor(select);
+selects.forEach(select => {
+  select.addEventListener('change', () => {
+    if (select.value === '') {
+      select.style.color = 'red';
+    } else {
+      select.style.color = '';
+    }
+  });
 });
 
 form.addEventListener('submit', async (event) => {
