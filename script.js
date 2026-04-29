@@ -76,14 +76,14 @@ const MATERIALS = [
   {
     id: 'fita-isolante',
     name: 'Fita Isolante',
-    unitLabel: 'Unidades',
+    unitLabel: 'Unidade',
     type: 'select',
     options: [1],
   },
   {
     id: 'fita-crepe',
     name: 'Fita Crepe',
-    unitLabel: 'Unidades',
+    unitLabel: 'Unidade',
     type: 'select',
     options: [1],
   },
