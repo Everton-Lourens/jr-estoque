@@ -308,6 +308,7 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
 
 function validateFields() {
   let valido = true;
+  let primeiroErro = null;
 
   const itens = document.querySelectorAll('.material-item');
 
@@ -323,9 +324,23 @@ function validateFields() {
     if (checkbox.checked && (!select.value || select.value === '')) {
       titulo.classList.add('erro');
       select.classList.add('borda-erro');
+
+      // guarda o primeiro erro
+      if (!primeiroErro) {
+        primeiroErro = item;
+      }
+
       valido = false;
     }
   });
+
+  // faz scroll até o primeiro erro
+  if (primeiroErro) {
+    primeiroErro.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }
 
   return valido;
 }
