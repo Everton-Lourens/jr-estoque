@@ -423,6 +423,42 @@ function clearSelection() {
   });
 }
 
+function verificarDia() {
+  try {
+  const status = document.getElementById('status-dia');
+
+  const hoje = new Date().getDay(); 
+  // 0 = domingo, 1 = segunda, 2 = terça...
+
+  const diasPermitidos = [2, 4, 6]; // terça, quinta, sábado
+
+  const nomesDias = [
+    'domingo',
+    'segunda-feira',
+    'terça-feira',
+    'quarta-feira',
+    'quinta-feira',
+    'sexta-feira',
+    'sábado'
+  ];
+
+  status.textContent = `Hoje é: ${nomesDias[hoje]}`;
+
+  if (diasPermitidos.includes(hoje)) {
+    status.classList.add('ok');
+    status.classList.remove('erro');
+  } else {
+    status.classList.add('erro');
+    status.classList.remove('ok');
+  }
+    } catch (error) {
+    console.error(error);
+    showFeedback('error', error.message);
+  }
+}
+
+verificarDia();
+
 const selects = document.querySelectorAll('.qty-input');
 
 selects.forEach(select => {
