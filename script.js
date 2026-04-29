@@ -423,6 +423,19 @@ function clearSelection() {
   });
 }
 
+function updateSelectColor(select) {
+  if (select.value === '') {
+    select.style.color = 'red';
+  } else {
+    select.style.color = '#000';
+  }
+}
+
+// aplica ao carregar a página
+document.querySelectorAll('.meu-select').forEach(select => {
+  updateSelectColor(select);
+});
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   clearFeedback();
