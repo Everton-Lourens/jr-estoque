@@ -103,6 +103,14 @@ body::before {
   line-height: 1.05;
 }
 
+.qty-input {
+  color: #999; /* cor padrão (cinza tipo placeholder) */
+}
+
+.qty-input.placeholder {
+  color: red;
+}
+
 .erro {
   color: #ff4d4d !important;
 }
