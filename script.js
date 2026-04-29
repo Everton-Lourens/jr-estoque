@@ -336,7 +336,7 @@ async function sendToTelegram(message) {
   }
 
   if (!validateFields()) {
-  alert('Preencha a quantidade dos itens selecionados!');
+    throw new Error('Preencha a quantidade dos itens selecionados!');
   return;
   }
 
