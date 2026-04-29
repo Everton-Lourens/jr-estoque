@@ -19,7 +19,7 @@ const MATERIALS = [
   },
   {
     id: 'drop-fibra',
-    name: 'Drop Fibra',
+    name: 'Drop Fibra.',
     unitLabel: 'Metros',
     type: 'select',
     options: [1000, 2000],
