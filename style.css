@@ -122,6 +122,21 @@ body::before {
   color: red;
 }
 
+#status-dia {
+  font-weight: normal;
+  font-size: 14px;
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+#status-dia.ok {
+  color: #2ecc71; /* verde suave */
+}
+
+#status-dia.erro {
+  color: #e74c3c; /* vermelho suave */
+}
+
 .brand-copy p {
   margin: 12px 0 0;
   color: var(--muted);
