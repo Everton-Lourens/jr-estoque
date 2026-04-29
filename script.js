@@ -426,20 +426,21 @@ function clearSelection() {
 const selects = document.querySelectorAll('.qty-input');
 
 selects.forEach(select => {
+  const label = document.querySelector(`label[for="${select.id}"]`);
 
-  const updateColor = () => {
+  const updateLabel = () => {
     if (select.value === '') {
-      select.classList.add('placeholder');
+      label.classList.add('label-error');
     } else {
-      select.classList.remove('placeholder');
+      label.classList.remove('label-error');
     }
   };
 
   // estado inicial
-  updateColor();
+  updateLabel();
 
-  // quando muda
-  select.addEventListener('change', updateColor);
+  // ao mudar
+  select.addEventListener('change', updateLabel);
 });
 
 form.addEventListener('submit', async (event) => {
