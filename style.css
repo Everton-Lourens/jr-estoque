@@ -104,11 +104,11 @@ body::before {
 }
 
 .qty-input {
-  color: red; /* cor padrão (cinza tipo placeholder) */
+  color: white; /* cor padrão (cinza tipo placeholder) */
 }
 
 .qty-input.placeholder {
-  color: green;
+  color: red;
 }
 
 .erro {
