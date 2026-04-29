@@ -12,7 +12,7 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC.',
+    name: 'Conectores SC/APC...',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
@@ -429,6 +429,7 @@ selects.forEach(select => {
   const label = document.querySelector(`label[for="${select.id}"]`);
 
   const updateLabel = () => {
+    Alert(select.value);
     if (select.value === 'Selecione') {
       label.classList.add('label-error');
     } else {
