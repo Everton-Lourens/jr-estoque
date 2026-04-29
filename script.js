@@ -12,7 +12,7 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 const MATERIALS = [
   {
     id: 'conectores-apc',
-    name: 'Conectores SC/APC',
+    name: 'Conectores SC/APC.',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
@@ -308,7 +308,7 @@ function buildTelegramMessage(data, selectedMaterials, generatedAt) {
 
 function validateFields() {
   let valido = true;
-  let primeiroErro = null;
+  let primeiroErro = null; // 👈 guarda o primeiro erro
 
   const itens = document.querySelectorAll('.material-item');
 
@@ -325,29 +325,24 @@ function validateFields() {
       titulo.classList.add('erro');
       select.classList.add('borda-erro');
 
-      // guarda o primeiro erro
       if (!primeiroErro) {
-        primeiroErro = item;
+        primeiroErro = item; // 👈 salva o primeiro erro encontrado
       }
 
       valido = false;
     }
   });
 
-if (primeiroErro) {
-  primeiroErro.scrollIntoView({
-    behavior: 'smooth',
-    block: 'center'
-  });
-
-  const select = primeiroErro.querySelector('select');
-  if (select) {
-    select.focus();
+  // 👇 faz o scroll até o primeiro erro
+  if (primeiroErro) {
+    primeiroErro.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
   }
-}
 
   return valido;
-}
+        }
 
 async function sendToTelegram(message) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID || TELEGRAM_BOT_TOKEN.includes('COLOQUE_') || TELEGRAM_CHAT_ID.includes('COLOQUE_')) {
