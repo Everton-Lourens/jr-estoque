@@ -11,15 +11,8 @@ const TELEGRAM_CHAT_ID = '-1003549071393';
 
 const MATERIALS = [
   {
-    id: 'esticadores',
-    name: 'Esticadores',
-    unitLabel: 'Unidades',
-    type: 'select',
-    options: [50, 100],
-  },
-  {
-    id: 'placas-jr',
-    name: 'Placas JR',
+    id: 'conectores-apc',
+    name: 'Conectores APC',
     unitLabel: 'Unidades',
     type: 'select',
     options: [10, 20, 30],
@@ -32,39 +25,39 @@ const MATERIALS = [
     options: [1000, 2000],
   },
   {
+    id: 'bucha-parafuso',
+    name: 'Bucha & Parafuso',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [50, 100],
+  },
+  {
     id: 'fixa-fio',
     name: 'Fixa Fio',
     unitLabel: 'Unidades',
     type: 'select',
     options: [100, 200],
   },
-  {
-    id: 'fita-crepe',
-    name: 'Fita Crepe',
-    unitLabel: 'Unidades',
-    type: 'select',
-    options: [1],
-  },
-  {
-    id: 'fita-isolante',
-    name: 'Fita Isolante',
-    unitLabel: 'Unidades',
-    type: 'select',
-    options: [1],
-  },
-  {
-    id: 'conectores-apc',
-    name: 'Conectores APC',
-    unitLabel: 'Unidades',
-    type: 'select',
-    options: [10, 20, 30],
-  },
-  {
+    {
     id: 'abracadeira',
     name: 'Abraçadeira',
     unitLabel: 'Unidades',
     type: 'select',
     options: [100, 200],
+  },
+  {
+    id: 'esticadores',
+    name: 'Esticadores',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [50, 100],
+  },
+  {
+    id: 'etiqueta-lacre',
+    name: 'Etiqueta Lacre',
+    unitLabel: 'Cartela (69 etiquetas)',
+    type: 'select',
+    options: [1, 2],
   },
   {
     id: 'espiral',
@@ -74,11 +67,25 @@ const MATERIALS = [
     options: [1, 2],
   },
   {
-    id: 'bucha-parafuso',
-    name: 'Bucha & Parafuso',
+    id: 'placas-jr',
+    name: 'Placas JR',
     unitLabel: 'Unidades',
     type: 'select',
-    options: [50, 100],
+    options: [10, 20, 30],
+  },
+  {
+    id: 'fita-isolante',
+    name: 'Fita Isolante',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [1],
+  },
+  {
+    id: 'fita-crepe',
+    name: 'Fita Crepe',
+    unitLabel: 'Unidades',
+    type: 'select',
+    options: [1],
   },
   {
     id: 'bucha-acabamento',
@@ -86,13 +93,6 @@ const MATERIALS = [
     unitLabel: 'Unidades',
     type: 'select',
     options: [5, 10, 15],
-  },
-  {
-    id: 'etiqueta-lacre',
-    name: 'Etiqueta Lacre',
-    unitLabel: 'Cartela (69 etiquetas)',
-    type: 'select',
-    options: [1, 2],
   },
 ];
 
