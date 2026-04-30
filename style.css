@@ -79,12 +79,21 @@ body::before {
 .brand-mark {
   width: 66px;
   height: 66px;
-  border-radius: 50%; /* deixa redondo */
-  overflow: hidden;   /* corta a imagem no formato circular */
+  border-radius: 50%;
+  overflow: hidden;
 
-  display: block;     /* remove centralização de texto */
-  background: none;   /* remove fundo gradiente */
-  padding: 0;         /* garante que não deforme */
+  display: block;
+  background: none;
+}
+
+/* força a imagem a respeitar o círculo */
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border-radius: 50%; /* ESSENCIAL → garante o corte */
+  display: block;
 }
 
 .brand-copy .eyebrow {
