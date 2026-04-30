@@ -442,7 +442,7 @@ function verificarDia() {
     'sábado'
   ];
 
-  status.textContent = `Hoje é: ${nomesDias[hoje]}`;
+  status.textContent = `${nomesDias[hoje]}`;
 
   if (diasPermitidos.includes(hoje)) {
     status.classList.add('ok');
