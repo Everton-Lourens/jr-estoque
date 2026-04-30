@@ -433,13 +433,13 @@ function verificarDia() {
   const diasPermitidos = [2, 4, 6]; // terça, quinta, sábado
 
   const nomesDias = [
-    'domingo',
-    'segunda-feira',
-    'terça-feira',
-    'quarta-feira',
-    'quinta-feira',
-    'sexta-feira',
-    'sábado'
+    'Domingo',
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-feira',
+    'Sexta-feira',
+    'Sábado'
   ];
 
   status.textContent = `${nomesDias[hoje]}`;
