@@ -79,14 +79,12 @@ body::before {
 .brand-mark {
   width: 66px;
   height: 66px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  font-size: 1.15rem;
-  background: linear-gradient(135deg, #ffffff, #8dc9ff);
-  color: #05305f;
+  border-radius: 50%; /* deixa redondo */
+  overflow: hidden;   /* corta a imagem no formato circular */
+
+  display: block;     /* remove centralização de texto */
+  background: none;   /* remove fundo gradiente */
+  padding: 0;         /* garante que não deforme */
 }
 
 .brand-copy .eyebrow {
