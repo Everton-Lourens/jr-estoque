@@ -176,7 +176,7 @@ function createMaterialCard(material) {
 
   const helper = material.type === 'number'
     ? `Limite: de ${material.min} até ${material.max}`
-    : `Opções permitidas: ${material.options.map((value) => formatOptionLabel(material, value)).join(', ')}`;
+    : `Opções: ${material.options.map((value) => formatOptionLabel(material, value)).join(', ')}`;
 
   const control = material.type === 'number'
     ? `
