@@ -2,7 +2,7 @@
 // Site estático para GitHub Pages com envio ao Telegram.
 
 const BASE_NAME = 'CAMAÇARI';
-const SECTION_TITLE = '~PEDIDO DE ESTOQUE~';
+const SECTION_TITLE = '—> PEDIDO DE ESTOQUE <—';
 const MESSAGE_TITLE = '🚨 Nova Solicitação 🚨';
 
 // Mantidas no código, como solicitado.
