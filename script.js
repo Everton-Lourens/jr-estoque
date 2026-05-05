@@ -2,8 +2,8 @@
 // Site estático para GitHub Pages com envio ao Telegram.
 
 const BASE_NAME = 'CAMAÇARI';
-const SECTION_TITLE = 'Pedidos - Estoque';
-const MESSAGE_TITLE = '🚨 Nova Solicitação de Materiais de Estoque 🚨';
+const SECTION_TITLE = '~PEDIDO DE ESTOQUE~';
+const MESSAGE_TITLE = '🚨 Nova Solicitação 🚨';
 
 // Mantidas no código, como solicitado.
 const TELEGRAM_BOT_TOKEN = '8675551330:AAH5G9TcjqoI-rjvCr-QBAlQ4Wsxkolu9hY';
